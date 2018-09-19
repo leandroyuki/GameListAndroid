@@ -1,11 +1,13 @@
 package br.com.takahashi.leandro.meusjogos.listajogos
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import android.widget.Toast
 import br.com.takahashi.leandro.meusjogos.R
+import br.com.takahashi.leandro.meusjogos.detalheJogo.DetalheActivity
 import br.com.takahashi.leandro.meusjogos.model.Jogo
 import kotlinx.android.synthetic.main.activity_lista_jogos.*
 
@@ -16,7 +18,12 @@ class ListaJogos : AppCompatActivity() {
         setContentView(R.layout.activity_lista_jogos)
 
         rvJogos.adapter = JogosAdapter(this, getjogos(),{
-            Toast.makeText(this,it.titulo, Toast.LENGTH_LONG).show()
+           // Toast.makeText(this,it.titulo, Toast.LENGTH_LONG).show()
+            jogo ->
+            val detalheIntent = Intent(this, DetalheActivity::class.java)
+            detalheIntent.putExtra("JOGO",jogo)
+            startActivity(detalheIntent)
+
         })
 
         rvJogos.layoutManager = LinearLayoutManager(this)
